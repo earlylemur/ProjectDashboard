@@ -1,0 +1,16 @@
+﻿
+
+Divide into tabs
+First tab is a list of projects
+Second tab is Software shortcuts
+Third tab is Directory shortcuts
+Fourth tab is Internet shortcuts
+
+First tab
+PROJECTS
+list up directories in your projects folder.
+Checkbox and name
+if check, update other tabs.
+
+Project class
+DirShortcuts

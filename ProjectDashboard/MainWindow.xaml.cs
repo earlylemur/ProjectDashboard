@@ -24,12 +24,17 @@ namespace ProjectDashboard
     {
         public MainWindow()
         {
+          
             InitializeComponent();
+            //this.DataContext = new MainWindowViewModel();
+            
         }
 
-        private void button_Click(object sender, RoutedEventArgs e)
+
+
+        private void button_Click_1(object sender, RoutedEventArgs e)
         {
-            Process.Start(@"C:\Users\Public\Documents\Projects\ProjectA");
+            VM.SetProject();
         }
     }
 }

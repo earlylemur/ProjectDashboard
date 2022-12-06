@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Security.Policy;
 using System.Diagnostics;
 using System.IO;
+using System.Collections.ObjectModel;
 
 namespace ProjectDashboard
 {
@@ -23,10 +24,10 @@ namespace ProjectDashboard
     public class Project : ILaunchable
     {
         public string Label { get; set; } = "";
-        public List<WebPath> Webpaths { get; set; } = new List<WebPath>();
-        public List<FolderPath> FolderPaths { get; set; } = new List<FolderPath>();
-        public List<Software> SoftwarePaths { get; set; } = new List<Software>();
-        public List<Contact> Contacts { get; set; } = new List<Contact>();
+        public ObservableCollection<WebPath> WebPaths { get; set; } = new ObservableCollection<WebPath>();
+        public ObservableCollection<FolderPath> FolderPaths { get; set; } = new ObservableCollection<FolderPath>();
+        public ObservableCollection<Software> SoftwarePaths { get; set; } = new ObservableCollection<Software>();
+        public ObservableCollection<Contact> Contacts { get; set; } = new ObservableCollection<Contact>();
         public string Path { get; set; } = "";
 
         public bool Launch()

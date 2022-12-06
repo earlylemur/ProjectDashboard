@@ -6,8 +6,33 @@
         xmlns:local="clr-namespace:ProjectDashboard"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <local:MainWindowViewModel x:Name="VM" />
+    </Window.DataContext>
     <Grid>
-        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="148,166,0,0" VerticalAlignment="Top" Click="button_Click"/>
+        <TabControl x:Name="tabControl" Margin="235,0,0,0">
+            <TabItem Header="Folders">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="dataGrid" ItemsSource="{Binding FolderPaths}"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Webpages">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="dataGrid2" ItemsSource="{Binding WebPaths}"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Software">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="dataGrid3" ItemsSource="{Binding SoftwarePaths}"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Contacts">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="dataGrid5" ItemsSource="{Binding Contacts}"/>
+                </Grid>
+            </TabItem>
 
+        </TabControl>
+        <Button x:Name="button" Content="Load project" HorizontalAlignment="Left" Margin="10,0,0,10" Click="button_Click_1" Height="20" VerticalAlignment="Bottom"/>
     </Grid>
 </Window>

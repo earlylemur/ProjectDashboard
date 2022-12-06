@@ -19,7 +19,7 @@ namespace ProjectDashBoardTests
         public void LaunchWeb()
         {
             var project = DefaultProject.CreateDefaultProject();
-            Assert.IsTrue(project.Webpaths[0].Launch());
+            Assert.IsTrue(project.WebPaths[0].Launch());
 
         }
 

@@ -24,7 +24,6 @@ namespace ProjectDashboard
     {
         public MainWindow()
         {
-          
             InitializeComponent();
             //this.DataContext = new MainWindowViewModel();
             
@@ -35,6 +34,34 @@ namespace ProjectDashboard
         private void button_Click_1(object sender, RoutedEventArgs e)
         {
             VM.SetProject();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Btn_WebLaunch_Click(object sender, RoutedEventArgs e)
+        {
+            VM.SelectedWebPath.Launch();
+        }
+
+        private void Btn_FolderLaunch_Click(object sender, RoutedEventArgs e)
+        {
+            VM.SelectedFolderPath.Launch();
+        }
+
+        private void Btn_SoftwLaunch_Click(object sender, RoutedEventArgs e)
+        {
+            VM.SelectedSoftwarePath.Launch();
+        }
+
+        private void Btn_Save_Click(object sender, RoutedEventArgs e)
+        {
+            if (VM.CurrentProject != null && !String.IsNullOrEmpty(VM.CurrentProject.Label))
+            {
+                FileIO.WriteToFile(VM.CurrentProject);
+            }
         }
     }
 }

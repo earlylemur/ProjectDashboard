@@ -8,6 +8,8 @@ using System.Security.Policy;
 using System.Diagnostics;
 using System.IO;
 using System.Collections.ObjectModel;
+using System.IO;
+using Newtonsoft.Json.Linq;
 
 namespace ProjectDashboard
 {
@@ -29,6 +31,10 @@ namespace ProjectDashboard
         public ObservableCollection<Software> SoftwarePaths { get; set; } = new ObservableCollection<Software>();
         public ObservableCollection<Contact> Contacts { get; set; } = new ObservableCollection<Contact>();
         public string Path { get; set; } = "";
+        public Project(string label)
+        {
+            Label = label;
+        }
 
         public bool Launch()
         {
@@ -42,6 +48,18 @@ namespace ProjectDashboard
             }
             return true;
         }
+
+        public string SerializeToJson()
+        {
+            JObject o = (JObject)JToken.FromObject(this);
+            return o.ToString();
+        }
+        public string GetSavePath()
+        {
+            
+
+            return System.IO.Path.Combine(Path, Label+".json");
+        }
     }
 
 
@@ -49,7 +67,10 @@ namespace ProjectDashboard
     {
         public string Label { get; set; } = "";
         public string Path { get; set; } = "";
-
+        public FolderPath(string path)
+        {
+            Path = path;
+        }
         public bool Launch()
         {
             try
@@ -112,12 +133,12 @@ namespace ProjectDashboard
 
     public class Contact
     {
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string Phone { get; set; }
-        public string Company { get; set; }
-        public string Role { get; set; }
-        public string Description { get; set; }
+        public string Name { get; set; } = "";
+        public string Email { get; set; } = "";
+        public string Phone { get; set; } = "";
+        public string Company { get; set; } = "";
+        public string Role { get; set; } = "";
+        public string Description { get; set; } = "";
 
     }
 

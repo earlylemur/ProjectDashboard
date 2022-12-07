@@ -12,8 +12,7 @@ namespace ProjectDashboard
     {
         public static Project CreateDefaultProject()
         {
-            var project = new Project();
-            project.Label = "DefaultProject";
+            var project = new Project("ProjectA");
             project.Path = "C:\\Users\\Public\\Documents\\Projects\\ProjectA";
 
             project.WebPaths = new ObservableCollection<WebPath>() 

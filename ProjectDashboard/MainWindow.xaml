@@ -13,26 +13,57 @@
         <TabControl x:Name="tabControl" Margin="235,0,0,0">
             <TabItem Header="Folders">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="dataGrid" ItemsSource="{Binding FolderPaths}"/>
+                    <DataGrid x:Name="dataGrid" SelectedItem="{Binding SelectedFolderPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding FolderPaths}">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="Launch">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button x:Name="Btn_FolderLaunch" Click="Btn_FolderLaunch_Click">Go</Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </Grid>
             </TabItem>
             <TabItem Header="Webpages">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="dataGrid2" ItemsSource="{Binding WebPaths}"/>
+                    <DataGrid x:Name="dataGrid2" SelectedItem="{Binding SelectedWebPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding WebPaths}">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="Launch">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button x:Name="btn_launch" Click="Btn_WebLaunch_Click">Go</Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </Grid>
             </TabItem>
             <TabItem Header="Software">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="dataGrid3" ItemsSource="{Binding SoftwarePaths}"/>
+                    <DataGrid x:Name="dataGrid3" SelectedItem="{Binding SelectedSoftwarePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding SoftwarePaths}">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="Launch">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button x:Name="Btn_SoftwLaunch" Click="Btn_SoftwLaunch_Click">Go</Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </Grid>
             </TabItem>
             <TabItem Header="Contacts">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="dataGrid5" ItemsSource="{Binding Contacts}"/>
+                    <DataGrid x:Name="dataGrid5" SelectedItem="" ItemsSource="{Binding Contacts}"/>
                 </Grid>
             </TabItem>
 
         </TabControl>
         <Button x:Name="button" Content="Load project" HorizontalAlignment="Left" Margin="10,0,0,10" Click="button_Click_1" Height="20" VerticalAlignment="Bottom"/>
+        <Button x:Name="Btn_Save" Content="Save project" HorizontalAlignment="Left" Margin="112,0,0,10" Click="Btn_Save_Click" Height="20" VerticalAlignment="Bottom"/>
     </Grid>
 </Window>

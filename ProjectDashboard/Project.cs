@@ -8,8 +8,8 @@ using System.Security.Policy;
 using System.Diagnostics;
 using System.IO;
 using System.Collections.ObjectModel;
-using System.IO;
 using Newtonsoft.Json.Linq;
+using System.Windows;
 
 namespace ProjectDashboard
 {
@@ -49,17 +49,16 @@ namespace ProjectDashboard
             return true;
         }
 
-        public string SerializeToJson()
-        {
-            JObject o = (JObject)JToken.FromObject(this);
-            return o.ToString();
-        }
+
         public string GetSavePath()
         {
-            
-
-            return System.IO.Path.Combine(Path, Label+".json");
+            return Path;
         }
+        public void SetSavePath(string inputPath)
+        {
+            Label = System.IO.Path.GetFileName(inputPath);
+            Path = inputPath;
+      }
     }
 
 
@@ -98,7 +97,17 @@ namespace ProjectDashboard
         {
             try
             {
-                Process.Start(Path);
+                if (File.Exists(Path))
+                {
+                    ProcessStartInfo psStartInfo = new ProcessStartInfo();
+                    psStartInfo.FileName = Path;
+
+                    Process ps = Process.Start(psStartInfo);
+                }
+                else
+                {
+                    MessageBox.Show("File not found");
+                }
             }
             catch
             {

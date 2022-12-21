@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
+using System.Windows.Controls;
 
 namespace ProjectDashboard
 {
@@ -15,6 +16,7 @@ namespace ProjectDashboard
         private FolderPath _selectedFolderPath = new FolderPath("");
         private Software _selectedSoftwarePath = new Software("");
         private Contact _selectedContact = new Contact();
+        private TabItem _selectedTabItem = new TabItem();
         public Project CurrentProject 
         {
             get { return _currentProject; }
@@ -26,6 +28,18 @@ namespace ProjectDashboard
                 OnPropertyChanged(nameof(Contacts));
                 OnPropertyChanged(nameof(SoftwarePaths));
             } 
+        }
+
+        public string ProjectSavePath
+        {
+            get { return CurrentProject.GetSavePath(); }
+            set { CurrentProject.SetSavePath(value); OnPropertyChanged(nameof(ProjectSavePath)); }
+        }
+
+        public TabItem SelectedTabItem
+        {
+            get { return _selectedTabItem; }
+            set { _selectedTabItem = value; OnPropertyChanged(nameof(SelectedTabItem)); }
         }
 
         public ObservableCollection<FolderPath> FolderPaths
@@ -88,7 +102,59 @@ namespace ProjectDashboard
         {
             CurrentProject = DefaultProject.CreateDefaultProject();
         }
- 
+
+        public void AddFolder()
+        {
+            if(FolderPaths != null)
+            {
+                FolderPaths.Add(new FolderPath("NewPath"));
+            }
+        }
+        public void AddWebpath()
+        {
+            if (WebPaths != null)
+            {
+                WebPaths.Add(new WebPath("NewPath"));
+            }
+        }
+        public void AddSoftwarePath()
+        {
+            if (SoftwarePaths != null)
+            {
+                SoftwarePaths.Add(new Software("NewPath"));
+            }
+        }
+
+        public void AddContact()
+        {
+            if (Contacts != null)
+            {
+                Contacts.Add(new Contact());
+            }
+        }
+
+        public bool SaveProject()
+        {
+            if (CurrentProject != null && !String.IsNullOrEmpty(CurrentProject.Path))
+            {
+                return FileIO.WriteProjectToFile(CurrentProject);
+            }
+            return false;
+        }
+
+        public bool LoadProject()
+        {
+            if (CurrentProject != null && !String.IsNullOrEmpty(CurrentProject.Path))
+            {
+                if(FileIO.ReadProjectFromFile(CurrentProject, out Project readProject))
+                {
+                    CurrentProject = readProject;
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged(String propertyName)

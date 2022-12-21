@@ -2,6 +2,7 @@
 using System;
 using ProjectDashboard;
 using System.Diagnostics;
+using System.IO;
 
 namespace ProjectDashBoardTests
 {
@@ -29,6 +30,13 @@ namespace ProjectDashBoardTests
             var project = DefaultProject.CreateDefaultProject();
             Assert.IsTrue(project.SoftwarePaths[0].Launch());
 
+        }
+
+        [TestMethod]
+        public void FindSoftwareExe()
+        {
+            var path = "C:\\Users\\1990olfy\\AppData\\Roaming\\Spotify\\Spotify.exe";
+            Assert.IsTrue(File.Exists(path));
         }
     }
 }

@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 
 namespace ProjectDashboard
 {
@@ -26,7 +27,7 @@ namespace ProjectDashboard
         {
             InitializeComponent();
             //this.DataContext = new MainWindowViewModel();
-            
+
         }
 
 
@@ -58,9 +59,37 @@ namespace ProjectDashboard
 
         private void Btn_Save_Click(object sender, RoutedEventArgs e)
         {
-            if (VM.CurrentProject != null && !String.IsNullOrEmpty(VM.CurrentProject.Label))
+            if (!VM.SaveProject())
             {
-                FileIO.WriteToFile(VM.CurrentProject);
+                MessageBox.Show("Failed to save project");
+            };
+        }
+
+        private void btn_AddFolder_Click(object sender, RoutedEventArgs e)
+        {
+            VM.AddFolder();
+        }
+
+        private void btn_AddWebpage_Click(object sender, RoutedEventArgs e)
+        {
+            VM.AddWebpath();
+        }
+
+        private void btn_AddSoftware_Click(object sender, RoutedEventArgs e)
+        {
+            VM.AddSoftwarePath();
+        }
+
+        private void btn_AddContact_Click(object sender, RoutedEventArgs e)
+        {
+            VM.AddContact();
+        }
+
+        private void btn_Load_Click(object sender, RoutedEventArgs e)
+        {
+            if (!VM.LoadProject())
+            {
+                MessageBox.Show("Failed to load project.");
             }
         }
     }

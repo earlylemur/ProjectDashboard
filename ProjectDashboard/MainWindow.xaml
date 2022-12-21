@@ -10,10 +10,14 @@
         <local:MainWindowViewModel x:Name="VM" />
     </Window.DataContext>
     <Grid>
-        <TabControl x:Name="tabControl" Margin="235,0,0,0">
-            <TabItem Header="Folders">
+        <TabControl x:Name="tabControl" Margin="235,0,0,0" SelectedItem="{Binding SelectedTabItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <TabItem x:Name="tabItem_Folders" Header="Folders">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="dataGrid" SelectedItem="{Binding SelectedFolderPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding FolderPaths}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="33"/>
+                    </Grid.RowDefinitions>
+                    <DataGrid x:Name="dataGrid" Grid.Row="0" SelectedItem="{Binding SelectedFolderPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding FolderPaths}">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn Header="Launch">
                                 <DataGridTemplateColumn.CellTemplate>
@@ -24,10 +28,15 @@
                             </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
+                    <Button x:Name="btn_AddFolder"  Width="70" Height="27" Content="Add" Grid.Row="1" Margin="0,3,10,3" HorizontalAlignment="Right" Click="btn_AddFolder_Click"></Button>
                 </Grid>
             </TabItem>
-            <TabItem Header="Webpages">
+            <TabItem x:Name="tabItem_Webpages" Header="Webpages">
                 <Grid Background="#FFE5E5E5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="33"/>
+                    </Grid.RowDefinitions>
                     <DataGrid x:Name="dataGrid2" SelectedItem="{Binding SelectedWebPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding WebPaths}">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn Header="Launch">
@@ -39,10 +48,15 @@
                             </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
+                    <Button x:Name="btn_AddWebpage"  Width="70" Height="27" Content="Add" Grid.Row="1" Margin="0,3,10,3" HorizontalAlignment="Right" Click="btn_AddWebpage_Click"></Button>
                 </Grid>
             </TabItem>
-            <TabItem Header="Software">
+            <TabItem x:Name="tabItem_Software" Header="Software">
                 <Grid Background="#FFE5E5E5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="33"/>
+                    </Grid.RowDefinitions>
                     <DataGrid x:Name="dataGrid3" SelectedItem="{Binding SelectedSoftwarePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding SoftwarePaths}">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn Header="Launch">
@@ -54,16 +68,24 @@
                             </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
+                    <Button x:Name="btn_AddSoftware"  Width="70" Height="27" Content="Add" Grid.Row="1" Margin="0,3,10,3" HorizontalAlignment="Right" Click="btn_AddSoftware_Click"></Button>
                 </Grid>
             </TabItem>
-            <TabItem Header="Contacts">
+            <TabItem x:Name="tabItem_Contacts" Header="Contacts">
                 <Grid Background="#FFE5E5E5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="33"/>
+                    </Grid.RowDefinitions>
                     <DataGrid x:Name="dataGrid5" SelectedItem="" ItemsSource="{Binding Contacts}"/>
+                    <Button x:Name="btn_AddContact"  Width="70" Height="27" Content="Add" Grid.Row="1" Margin="0,3,10,3" HorizontalAlignment="Right" Click="btn_AddContact_Click"></Button>
                 </Grid>
             </TabItem>
 
         </TabControl>
-        <Button x:Name="button" Content="Load project" HorizontalAlignment="Left" Margin="10,0,0,10" Click="button_Click_1" Height="20" VerticalAlignment="Bottom"/>
+        <Button x:Name="btn_Load" Content="Load project" HorizontalAlignment="Left" Margin="10,0,0,10" Click="btn_Load_Click" Height="20" VerticalAlignment="Bottom"/>
         <Button x:Name="Btn_Save" Content="Save project" HorizontalAlignment="Left" Margin="112,0,0,10" Click="Btn_Save_Click" Height="20" VerticalAlignment="Bottom"/>
+        <Label x:Name="lbl_ProjectPath" Content="Project path" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox" Margin="10,41,0,0" TextWrapping="Wrap" Text="{Binding ProjectSavePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Height="27" HorizontalAlignment="Left" Width="200"/>
     </Grid>
 </Window>

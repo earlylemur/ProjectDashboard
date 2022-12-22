@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Win32;
+using System.Collections.ObjectModel;
 
 namespace ProjectDashboard
 {
@@ -23,11 +24,37 @@ namespace ProjectDashboard
     /// </summary>
     public partial class MainWindow : Window
     {
+       
+
         public MainWindow()
         {
-            InitializeComponent();
-            //this.DataContext = new MainWindowViewModel();
 
+
+            InitializeComponent();
+            if (!FileIO.HandleProjectDefaultLocation(SETTINGS.DEFAULT_PATH, SETTINGS.DEFAULT_FOLDER_NAME))
+            {
+                MessageBox.Show("Failed to set default directory.");
+                this.Close();
+                return;
+            }
+            if (FileIO.GetProjectsFromLocation(System.IO.Path.Combine(SETTINGS.DEFAULT_PATH, SETTINGS.DEFAULT_FOLDER_NAME), out List<Project> readProjects))
+            {
+                if (VM.MyProjects == null)
+                {
+                    VM.MyProjects = new ObservableCollection<Project>();
+                }
+                VM.MyProjects.Clear();
+                foreach (var project in readProjects)
+                {
+                    VM.MyProjects.Add(project);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Failed to get projects from default directory.");
+                this.Close();
+                return;
+            }
         }
 
 

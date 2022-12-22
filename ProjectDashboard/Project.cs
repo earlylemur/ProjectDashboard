@@ -35,6 +35,10 @@ namespace ProjectDashboard
         {
             Label = label;
         }
+        public Project() 
+        {
+            Label = "NewProject";
+        }
 
         public bool Launch()
         {
@@ -58,7 +62,12 @@ namespace ProjectDashboard
         {
             Label = System.IO.Path.GetFileName(inputPath);
             Path = inputPath;
-      }
+        
+        }
+        public override string ToString()
+        {
+            return Label;
+        }
     }
 
 

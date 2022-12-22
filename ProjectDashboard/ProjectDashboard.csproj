@@ -63,6 +63,7 @@
     <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="ProcessLauncher.cs" />
+    <Compile Include="SETTINGS.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

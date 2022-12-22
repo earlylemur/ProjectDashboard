@@ -17,17 +17,19 @@ namespace ProjectDashboard
         private Software _selectedSoftwarePath = new Software("");
         private Contact _selectedContact = new Contact();
         private TabItem _selectedTabItem = new TabItem();
-        public Project CurrentProject 
+        private ObservableCollection<Project> _myProjects = new ObservableCollection<Project>();
+     
+        public Project CurrentProject
         {
             get { return _currentProject; }
-            set { 
-                _currentProject = value; 
+            set {
+                _currentProject = value;
                 OnPropertyChanged(nameof(CurrentProject));
                 OnPropertyChanged(nameof(FolderPaths));
                 OnPropertyChanged(nameof(WebPaths));
                 OnPropertyChanged(nameof(Contacts));
                 OnPropertyChanged(nameof(SoftwarePaths));
-            } 
+            }
         }
 
         public string ProjectSavePath
@@ -97,6 +99,19 @@ namespace ProjectDashboard
 
         public MainWindowViewModel() { }
 
+        public ObservableCollection<Project> MyProjects
+        {
+            get
+            {
+                return _myProjects;
+            }
+            set
+            {
+                _myProjects = value;
+                OnPropertyChanged(nameof(MyProjects));
+            }
+        }
+
 
         public void SetProject()
         {
@@ -146,7 +161,7 @@ namespace ProjectDashboard
         {
             if (CurrentProject != null && !String.IsNullOrEmpty(CurrentProject.Path))
             {
-                if(FileIO.ReadProjectFromFile(CurrentProject, out Project readProject))
+                if(FileIO.ReadProjectFromFile(CurrentProject.Path, out Project readProject))
                 {
                     CurrentProject = readProject;
                     return true;

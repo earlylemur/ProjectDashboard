@@ -5,12 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjectDashboard"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" MinWidth="800">
     <Window.DataContext>
         <local:MainWindowViewModel x:Name="VM" />
     </Window.DataContext>
     <Grid>
-        <TabControl x:Name="tabControl" Margin="235,0,0,0" SelectedItem="{Binding SelectedTabItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MinWidth="250"></ColumnDefinition>
+            <ColumnDefinition MinWidth="600"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <ListBox x:Name="listBox" Grid.Column="0" ItemsSource="{Binding MyProjects, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding CurrentProject,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,100,0,0"/>
+        <TabControl Grid.Column="1"  x:Name="tabControl" Margin="2,2,2,2" SelectedItem="{Binding SelectedTabItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <TabItem x:Name="tabItem_Folders" Header="Folders">
                 <Grid Background="#FFE5E5E5">
                     <Grid.RowDefinitions>
@@ -87,5 +92,6 @@
         <Button x:Name="Btn_Save" Content="Save project" HorizontalAlignment="Left" Margin="112,0,0,10" Click="Btn_Save_Click" Height="20" VerticalAlignment="Bottom"/>
         <Label x:Name="lbl_ProjectPath" Content="Project path" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="textBox" Margin="10,41,0,0" TextWrapping="Wrap" Text="{Binding ProjectSavePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Height="27" HorizontalAlignment="Left" Width="200"/>
+        
     </Grid>
 </Window>

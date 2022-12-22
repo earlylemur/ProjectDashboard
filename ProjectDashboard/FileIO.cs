@@ -20,17 +20,15 @@ namespace ProjectDashboard
             return true;
         }
 
-        internal static bool ReadProjectFromFile(Project inputProject, out Project outputProject)
+        internal static bool ReadProjectFromFile(string projectFilePath, out Project outputProject)
         {
             outputProject = new Project("Attempt to read");
-            if (inputProject == null) return false;
             
-
             var result = "";
 
             try
             {
-                result = File.ReadAllText(inputProject.GetSavePath());
+                result = File.ReadAllText(projectFilePath);
             }
             catch
             {
@@ -55,5 +53,40 @@ namespace ProjectDashboard
                 JsonConvert.DeserializeObject<Project>(allText);
             return readProject;
         }
+
+        public static bool HandleProjectDefaultLocation(string defaultPath, string defaultProjectFolderName)
+        {
+            try
+            {
+                if (!Directory.Exists(Path.Combine(defaultPath, defaultProjectFolderName)))
+                {
+                    Directory.CreateDirectory(Path.Combine(defaultPath, defaultProjectFolderName));
+                }
+            } catch
+            {
+                return false;
+            }
+            return true;
+            
+        }
+
+        public static bool GetProjectsFromLocation(string location, out List<Project> savedProjects)
+        {
+            savedProjects= new List<Project>();
+            if(Directory.Exists(location))
+            {
+                var projectFiles = Directory.GetFiles(location).ToList();
+                foreach(var projectFile in projectFiles)
+                {
+                    if(ReadProjectFromFile(projectFile, out Project readProject))
+                    {
+                        savedProjects.Add(readProject);
+                    }
+                }
+                return true;
+            }
+            return false;
+        }
+
     }
 }
